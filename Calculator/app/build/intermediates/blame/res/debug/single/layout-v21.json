@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/dms/AndroidStudioProjects/Calculator/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/home/dms/.android/build-cache/844c8db38b928a775ff14a714a332739a425ffd1/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/home/dms/AndroidStudioProjects/Calculator/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/home/dms/.android/build-cache/844c8db38b928a775ff14a714a332739a425ffd1/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/home/dms/AndroidStudioProjects/Calculator/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/home/dms/.android/build-cache/844c8db38b928a775ff14a714a332739a425ffd1/output/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/home/dms/AndroidStudioProjects/Calculator/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/home/dms/.android/build-cache/844c8db38b928a775ff14a714a332739a425ffd1/output/res/layout-v21/notification_template_icon_group.xml"
+    }
+]

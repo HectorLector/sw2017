@@ -56,5 +56,5 @@ public class CalculatorUnitTest {
         int result = Calculations.doDivision(11, 4);
         assertEquals(2, result);
     }
-    
+
 }

@@ -3,6 +3,7 @@ package at.sw2017.calculator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,6 +14,8 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
     private List<Button> buttons = new ArrayList<>();
     private TextView numberView;
+    private int firstNumber;
+    private State state = State.INIT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +23,7 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_calculator);
 
         //Setup Buttons
-        Button buttonAdd = (Button) findViewById(R.id.buttonPlus);
+        Button buttonAdd = (Button) findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener(this);
         buttons.add(buttonAdd);
 
@@ -67,26 +70,83 @@ public class Calculator extends AppCompatActivity implements View.OnClickListene
 
         switch(clicked.getId())
         {
-            case R.id.buttonPlus:
+            case R.id.buttonAdd:
+                clearNumberView();
+                state = State.ADD;
                 break;
             case R.id.buttonMinus:
+                clearNumberView();
+                state = State.SUB;
                 break;
             case R.id.buttonMult:
+                clearNumberView();
+                state = State.MUL;
                 break;
             case R.id.buttonDiv:
+                clearNumberView();
+                state = State.DIV;
                 break;
             case R.id.buttonEqu:
+                calculateResult();
+                state = State.INIT;
                 break;
             case R.id.buttonC:
+                clearTextView();
                 break;
             default:
                 String recentNumber = numberView.getText().toString();
-                if(recentNumber.equals("0")){
+                if(state == State.INIT){
                     recentNumber = "";
+                    state = State.NUM;
                 }
                 recentNumber += clicked.getText().toString();
                 numberView.setText(recentNumber);
         }
 
+    }
+
+    private void clearTextView()
+    {
+        numberView.setText("0");
+        firstNumber = 0;
+        state = State.INIT;
+    }
+
+    private void clearNumberView(){
+        String tmp = numberView.getText().toString();
+        if(!tmp.equals("")) {
+            firstNumber = Integer.valueOf(tmp);
+        }
+        numberView.setText("");
+    }
+
+    private void calculateResult(){
+        int secondNumber = 0;
+
+        String tmp = numberView.getText().toString();
+        if(!tmp.equals("")){
+            secondNumber = Integer.valueOf(tmp);
+        }
+
+        int result;
+        switch(state)
+        {
+            case ADD:
+                result = Calculations.doAddition(firstNumber, secondNumber);
+                break;
+            case SUB:
+                result = Calculations.doSubstraction(firstNumber, secondNumber);
+                break;
+            case MUL:
+                result = Calculations.doMultiplication(firstNumber, secondNumber);
+                break;
+            case DIV:
+                result = Calculations.doDivision(firstNumber, secondNumber);
+                break;
+            default:
+                result = secondNumber;
+        }
+
+        numberView.setText(Integer.toString(result));
     }
 }

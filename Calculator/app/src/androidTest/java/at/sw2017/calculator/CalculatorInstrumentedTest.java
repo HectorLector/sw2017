@@ -13,6 +13,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
@@ -61,6 +62,64 @@ public class CalculatorInstrumentedTest {
             onView(withText(Integer.toString(i))).perform(click());
         }
         onView(withText("9876543210")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testClearButton() throws Exception
+    {
+        onView(withText("3")).perform(click());
+        onView(withText("C")).perform(click());
+
+        onView(withId(R.id.textView)).check(matches(withText("0")));
+    }
+
+    @Test
+    public void testOnlyOneNumber() throws Exception
+    {
+        onView(withText("1")).perform(click());
+        onView(withText("=")).perform(click());
+
+        onView(withId(R.id.textView)).check(matches(withText("1")));
+    }
+
+    @Test
+    public void testAdditionButton() throws Exception
+    {
+        onView(withText("9")).perform(click());
+        onView(withText("+")).perform(click());
+        onView(withText("2")).perform(click());
+        onView(withText("=")).perform(click());
+        onView(withId(R.id.textView)).check(matches(withText("11")));
+    }
+
+    @Test
+    public void testSubstractionButton() throws Exception
+    {
+        onView(withText("9")).perform(click());
+        onView(withText("-")).perform(click());
+        onView(withText("2")).perform(click());
+        onView(withText("=")).perform(click());
+        onView(withId(R.id.textView)).check(matches(withText("7")));
+    }
+
+    @Test
+    public void testMultiplicationButton() throws Exception
+    {
+        onView(withText("9")).perform(click());
+        onView(withText("*")).perform(click());
+        onView(withText("2")).perform(click());
+        onView(withText("=")).perform(click());
+        onView(withId(R.id.textView)).check(matches(withText("18")));
+    }
+
+    @Test
+    public void testDivisionButton() throws Exception
+    {
+        onView(withText("9")).perform(click());
+        onView(withText("/")).perform(click());
+        onView(withText("2")).perform(click());
+        onView(withText("=")).perform(click());
+        onView(withId(R.id.textView)).check(matches(withText("4")));
     }
 
 }
